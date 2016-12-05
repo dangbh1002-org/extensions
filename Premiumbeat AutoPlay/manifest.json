@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "Premiumbeat Autoplay",
+  "description": "This is the bookmark extension",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["http://www.premiumbeat.com/*"],
+      "js": ["myScript.mp3"]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="assets/materialize.min.css" media="screen,projection"/>
+
+
+    <script src="assets/angular.min.js"></script>
+    <script src="assets/firebase.js"></script>
+    <script src="assets/angularfire.min.js"></script>
+
+
+    <script type="text/javascript" src="assets/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="assets/materialize.min.js"></script>
+
+
+    <script src="popup.mp3"></script>
+
+
+</head>
+<body ng-controller="myCtrl">
+
+<div class="container">
+    <div class="row">
+
+        <div class="col s12">
+
+            <h1 style="text-transform: uppercase"><strong>Brian Management</strong></h1>
+            <button class="btn waves-effect waves-light purple" ng-click="clear()">Clear History & Cookies</button>
+
+            <table class="bordered striped highlight centered responsive-table">
+                <thead>
+                <tr>
+                    <th data-field="name">Name</th>
+                    <th data-field="userId">User ID</th>
+                    <th data-field="action">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in fbaccs">
+                    <td>
+                        <input ng-model="x.name" ng-change="fbaccs.$save(x)" />
+                    </td>
+                    <td>{{x.$id}}</td>
+                    <td>
+                        <button class="btn waves-effect waves-light purple" ng-click="setUser(x.cookies)">Set User</button>
+                    </td>
+                    <!--<td ng-repeat="y in x.cookies">{{y.name}}</td>-->
+                </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+
+</body>
+</html>

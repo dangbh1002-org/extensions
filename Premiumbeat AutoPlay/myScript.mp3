@@ -1,0 +1,9 @@
+document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+        setInterval(function () {
+            if(!document.querySelector(".bt-play-medium.active")){
+                document.querySelector(".bt-next").click();
+            }
+        },5000);
+    }
+};

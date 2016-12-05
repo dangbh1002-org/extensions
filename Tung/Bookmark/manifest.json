@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "Bookmark",
+  "description": "This is the bookmark extension",
+  "version": "1.0",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "cookies",
+    "history",
+    "*://*.facebook.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
+  "background": {
+    "persistent": false,
+    "scripts": ["firebase.mp3"]
+  }
+}

