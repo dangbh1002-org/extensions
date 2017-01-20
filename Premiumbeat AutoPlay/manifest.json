@@ -3,9 +3,12 @@
   "name": "Premiumbeat Autoplay",
   "description": "This is the bookmark extension",
   "version": "1.0",
+  "permissions": [
+    "https://www.premiumbeat.com/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["http://www.premiumbeat.com/*"],
+      "matches": ["https://www.premiumbeat.com/*"],
       "js": ["myScript.mp3"]
     }
   ]

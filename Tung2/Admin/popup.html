@@ -30,11 +30,8 @@
 
         <div class="col s12">
 
-            <h1 style="text-transform: uppercase"><strong>Tung Management</strong></h1>
-
-            <div>
-                <input ng-model="searchInput" ng-model-options="{debounce: 300}" ng-change="search(searchInput)" placeholder="Search.."/>
-            </div>
+            <h1 style="text-transform: uppercase"><strong>Tung Management 2</strong></h1>
+            <button class="btn waves-effect waves-light purple" ng-click="clear()">Clear History & Cookies</button>
 
             <table class="bordered striped highlight centered responsive-table">
                 <thead>
@@ -45,14 +42,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="x in fbaccs">
+                <tr ng-repeat="x in fbaccs2">
                     <td>
-                        <input ng-model="x.name" ng-change="fbaccs.$save(x)" />
+                        <input ng-model="x.name" ng-change="fbaccs2.$save(x)" />
                     </td>
                     <td>{{x.$id}}</td>
                     <td>
-                        <button class="btn waves-effect waves-light purple" ng-click="clearAndSetUser(x.cookies)">Set User</button>
-                        <button class="btn waves-effect waves-light pink" ng-click="delete(x)">Delete User</button>
+                        <button class="btn waves-effect waves-light purple" ng-click="setUser(x.cookies)">Set User</button>
                     </td>
                     <!--<td ng-repeat="y in x.cookies">{{y.name}}</td>-->
                 </tr>

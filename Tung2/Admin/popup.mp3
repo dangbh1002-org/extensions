@@ -11,9 +11,9 @@
 
 var app = angular.module("app", ["firebase"]);
 app.controller("myCtrl", function($scope, $firebaseArray) {
-    var ref = firebase.database().ref().child("fbaccs");
+    var ref = firebase.database().ref().child("fbaccs2");
 
-    $scope.fbaccs = $firebaseArray(ref);
+    $scope.fbaccs2 = $firebaseArray(ref);
 
     $scope.setUser = function (cookies) {
 
@@ -41,10 +41,10 @@ app.controller("myCtrl", function($scope, $firebaseArray) {
         }, function (){
 
         });
+
     };
 
-
-    $scope.clearAndSetUser = function (cookies) {
+    $scope.clear = function () {
 
         chrome.windows.getAll({populate:true},function(windows){
             windows.forEach(function(window){
@@ -81,25 +81,8 @@ app.controller("myCtrl", function($scope, $firebaseArray) {
             "webSQL": true
         }, function () {
             Materialize.toast('Clear browsing done!', 2000);
-            $scope.setUser(cookies);
         });
 
-    };
 
-    $scope.delete = function (x) {
-
-        var r = confirm("Are you sure to delete " + x.name + '?');
-        if (r == true) {
-            $scope.fbaccs.$remove(x).then(function(ref) {
-                Materialize.toast('Delete success!!!', 2000);
-            });
-        }
-    };
-
-    $scope.search = function (x) {
-        ref = firebase.database().ref().child("fbaccs").orderByChild("name").startAt(x).endAt(x + "\uf8ff");
-        $scope.fbaccs = $firebaseArray(ref);
     }
-
-
 });
